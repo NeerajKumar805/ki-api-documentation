@@ -360,14 +360,107 @@
 
 **GET** `/api/products`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Fetched all products",
+  "data": [
+    {
+      "productId": 1,
+      "title": "iPhone 16",
+      "description": "Latest iPhone",
+      "price": 999.99,
+      "inStock": true,
+      "category": "Electronics"
+    },
+    {
+      "productId": 2,
+      "title": "Bluetooth Headphones",
+      "description": "Noise-cancelling over-ear",
+      "price": 199.99,
+      "inStock": true,
+      "category": "Audio"
+    }
+  ]
+}
+```
+
 ### 3. Get Product by ID
 
 **GET** `/api/products/{id}`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Fetched product",
+  "data": {
+    "productId": 1,
+    "title": "iPhone 16",
+    "description": "Latest iPhone",
+    "price": 999.99,
+    "inStock": true,
+    "category": "Electronics"
+  }
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Product not found",
+  "data": null
+}
+```
+
 ### 4. Update Product (Full)
 
 **PUT** `/api/products/{id}`
-**Request** same full product JSON
+**Request**
+
+```json
+{
+  "title": "iPhone 16 Pro",
+  "description": "Upgraded iPhone with Pro features",
+  "price": 1199.99,
+  "inStock": true,
+  "category": "Electronics"
+}
+```
+
+**Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Product updated successfully",
+  "data": {
+    "productId": 1,
+    "title": "iPhone 16 Pro",
+    "description": "Upgraded iPhone with Pro features",
+    "price": 1199.99,
+    "inStock": true,
+    "category": "Electronics"
+  }
+}
+```
+
+**Error (400 Bad Request — duplicate)**
+
+```json
+{
+  "success": false,
+  "message": "Another product with same title and description exists",
+  "data": null
+}
+```
 
 ### 5. Update Product (Partial)
 
@@ -375,13 +468,62 @@
 **Request**
 
 ```json
-{ "price": 899.99 }
+{
+  "price": 899.99
+}
+```
+
+**Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Product patched successfully",
+  "data": {
+    "productId": 1,
+    "title": "iPhone 16 Pro",
+    "description": "Upgraded iPhone with Pro features",
+    "price": 899.99,
+    "inStock": true,
+    "category": "Electronics"
+  }
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Product not found",
+  "data": null
+}
 ```
 
 ### 6. Delete Product
 
 **DELETE** `/api/products/{id}`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Product deleted successfully",
+  "data": null
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Product not found",
+  "data": null
+}
+```
 ---
 
 ## Order APIs
@@ -415,14 +557,109 @@
 
 **GET** `/api/orders`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Fetched all orders",
+  "data": [
+    {
+      "orderId": 1,
+      "orderDate": "2025-06-15T10:00:00",
+      "orderStatus": "PLACED",
+      "totalAmount": 1199.99,
+      "user": { "userId": "neeraj20250615091200" },
+      "shippingAddress": { "addressId": 1 },
+      "products": [
+        { "productId": 1, "title": "iPhone 16 Pro", "description": "...", "price": 1199.99, "inStock": true, "category": "Electronics" }
+      ]
+    }
+  ]
+}
+```
+
 ### 3. Get Order by ID
 
 **GET** `/api/orders/{id}`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Order fetched",
+  "data": {
+    "orderId": 1,
+    "orderDate": "2025-06-15T10:00:00",
+    "orderStatus": "PLACED",
+    "totalAmount": 1199.99,
+    "user": { "userId": "neeraj20250615091200" },
+    "shippingAddress": { "addressId": 1 },
+    "products": [
+      { "productId": 1, "title": "iPhone 16 Pro", "description": "...", "price": 1199.99, "inStock": true, "category": "Electronics" }
+    ]
+  }
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Order not found",
+  "data": null
+}
+```
+
 ### 4. Update Order (Full)
 
 **PUT** `/api/orders/{id}`
-**Request** same full order JSON
+**Request**
+
+```json
+{
+  "orderStatus": "SHIPPED",
+  "totalAmount": 1199.99,
+  "user": { "userId": "neeraj20250615091200" },
+  "shippingAddress": { "addressId": 1 },
+  "products": [ { "productId": 1 } ],
+  "orderDate": "2025-06-15T12:00:00"
+}
+```
+
+**Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Order updated successfully",
+  "data": {
+    "orderId": 1,
+    "orderDate": "2025-06-15T12:00:00",
+    "orderStatus": "SHIPPED",
+    "totalAmount": 1199.99,
+    "user": { "userId": "neeraj20250615091200" },
+    "shippingAddress": { "addressId": 1 },
+    "products": [
+      { "productId": 1, "title": "iPhone 16 Pro", "description": "...", "price": 1199.99, "inStock": true, "category": "Electronics" }
+    ]
+  }
+}
+```
+
+**Error (400 Bad Request — no products)**
+
+```json
+{
+  "success": false,
+  "message": "At least one product is required",
+  "data": null
+}
+```
 
 ### 5. Update Order (Partial)
 
@@ -430,13 +667,63 @@
 **Request**
 
 ```json
-{ "orderStatus": "SHIPPED" }
+{
+  "orderStatus": "DELIVERED"
+}
+```
+
+**Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Order patched successfully",
+  "data": {
+    "orderId": 1,
+    "orderDate": "2025-06-15T12:00:00",
+    "orderStatus": "DELIVERED",
+    "totalAmount": 1199.99,
+    "user": { "userId": "neeraj20250615091200" },
+    "shippingAddress": { "addressId": 1 },
+    "products": [ /* same as above */ ]
+  }
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Order not found",
+  "data": null
+}
 ```
 
 ### 6. Delete Order
 
 **DELETE** `/api/orders/{id}`
 
+> No request body
+> **Success (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Order deleted successfully",
+  "data": null
+}
+```
+
+**Error (404 Not Found)**
+
+```json
+{
+  "success": false,
+  "message": "Order not found",
+  "data": null
+}
+```
 
 ---
 

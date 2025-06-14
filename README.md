@@ -265,15 +265,37 @@
 ### 2. Get All Addresses
 
 **GET** `/api/addresses`
-**200 OK**
+**Response (200 OK)**
 
 ```json
 {
   "success": true,
   "message": "Fetched all addresses",
-  "data": [ /* list of addresses */ ]
+  "data": [
+    {
+      "addressId": 1,
+      "area": "Sector 62",
+      "city": "Noida",
+      "state": "UP",
+      "pin": "201301",
+      "user": {
+        "userId": "neeraj20250615091200"
+      }
+    },
+    {
+      "addressId": 2,
+      "area": "MG Road",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pin": "560001",
+      "user": {
+        "userId": "john20250615091530"
+      }
+    }
+  ]
 }
 ```
+---
 
 ### 3. Get Address by ID
 
@@ -727,6 +749,4 @@
 
 ---
 
-@Auther{
-  Neeraj
-}
+> **Author:** Neeraj Kumar

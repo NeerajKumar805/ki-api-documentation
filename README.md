@@ -1,4 +1,4 @@
-#Kamsid Industries APIs Documention.
+# Kamsid Industries APIs Documention.
 
 ## User APIs
 
@@ -437,6 +437,9 @@
 
 **DELETE** `/api/orders/{id}`
 
+
 ---
 
-Please review this in-chat documentation. Once you confirm it’s exactly what you want, I’ll regenerate the PDF so it’s complete.
+@Auther{
+  Neeraj
+}
